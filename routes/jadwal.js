@@ -1,8 +1,9 @@
 const express = require('express');
 const jadwal = express.Router();
 const koneksi = require('../config/database');
+const auth = require('../middleware/auth');
 
-jadwal.post('/', (req, res) => {
+jadwal.post('/', auth, (req, res) => {
 
     let date_range = req.body.date_range;
 
@@ -28,7 +29,7 @@ jadwal.post('/', (req, res) => {
     });
 });
 
-jadwal.get('/', (req, res) => {
+jadwal.get('/', auth, (req, res) => {
     const querySql = 'SELECT id, doctor_id, day, time_start, time_finish, quota, status, date FROM t_jadwal WHERE is_deleted = 0';
 
     // jalankan query
@@ -44,7 +45,7 @@ jadwal.get('/', (req, res) => {
     });
 });
 
-jadwal.get('/:id', (req, res) => {
+jadwal.get('/:id', auth, (req, res) => {
     const querySql = 'SELECT id, doctor_id, day, time_start, time_finish, quota, status, date FROM t_jadwal where pid = ' + req.params.id;
 
     // jalankan query
@@ -56,7 +57,7 @@ jadwal.get('/:id', (req, res) => {
             // jika data tidak ada
             res.status(404).json({
                 success: false,
-                data: 'No Data'
+                data: 'Data Not Found'
             });
         } else {
             // jika request berhasil

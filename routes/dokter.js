@@ -1,6 +1,7 @@
 const express = require('express');
 const dokter = express.Router();
 const koneksi = require('../config/database');
+const auth = require('../middleware/auth');
 
 dokter.post('/', (req, res) => {
     let data = {
@@ -20,7 +21,7 @@ dokter.post('/', (req, res) => {
     });
 });
 
-dokter.get('/', (req, res) => {
+dokter.get('/', auth,(req, res) => {
     const querySql = 'SELECT * FROM m_dokter where is_deleted = 0';
 
     // jalankan query
@@ -36,7 +37,7 @@ dokter.get('/', (req, res) => {
     });
 });
 
-dokter.get('/:id', (req, res) => {
+dokter.get('/:id', auth, (req, res) => {
     const querySql = 'SELECT * FROM m_dokter where pid = ' + req.params.id;
 
     // jalankan query
@@ -60,7 +61,7 @@ dokter.get('/:id', (req, res) => {
     });
 });
 
-dokter.put('/:id', function (req, res) {
+dokter.put('/:id', auth, function (req, res) {
     let data = {
         kode_dokter: req.body.kode_dokter,
         nama_dokter: req.body.nama_dokter
@@ -78,7 +79,7 @@ dokter.put('/:id', function (req, res) {
     });
 });
 
-dokter.delete('/:id', function (req, res) {
+dokter.delete('/:id', auth, function (req, res) {
     const querySql = 'DELETE FROM m_dokter WHERE pid = ' + req.params.id;
 
     koneksi.query(querySql, data, (err, rows, field) => {
