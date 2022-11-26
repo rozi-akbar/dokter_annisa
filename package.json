@@ -1,0 +1,29 @@
+{
+  "name": "dokter",
+  "version": "1.0.0",
+  "description": "dibuat untuk kebutuhan test soal pemrograman calon programmer RS An-Nisa Tangerang",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rozi-akbar/dokter_annisa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rozi-akbar/dokter_annisa/issues"
+  },
+  "homepage": "https://github.com/rozi-akbar/dokter_annisa#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
+    "express-jwt": "^7.7.7",
+    "express-validator": "^6.14.2",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.20"
+  }
+}
